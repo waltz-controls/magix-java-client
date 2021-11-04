@@ -1,12 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.waltz-controls.magix</groupId>
+    <groupId>waltz-controls.magix</groupId>
     <artifactId>java-client</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
+        <jax-rs-api.version>2.1.1</jax-rs-api.version>
+        <resteasy.version>4.5.7.Final</resteasy.version>
+        <slf4j-api.version>1.7.5</slf4j-api.version>
       <github.organization>waltz-controls</github.organization>
       <github.repo>magix-java-client</github.repo>
     </properties>
@@ -63,6 +66,31 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.6.4</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jcl</artifactId>
+            <version>${slf4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>${jax-rs-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.reactivex.rxjava3</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>3.0.4</version>
         </dependency>
     </dependencies>
 </project>
