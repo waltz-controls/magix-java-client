@@ -15,6 +15,7 @@ import javax.ws.rs.sse.SseEventSource;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -66,7 +67,7 @@ public class Magix implements AutoCloseable {
     }
 
     private void onComplete() {
-        System.out.println("onComplete");
+        logger.warn("Connection to Magix host {} is interrupted!", host);
     }
 
     public <T> void broadcast(String channel, T message) {
