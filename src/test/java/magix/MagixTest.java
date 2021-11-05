@@ -22,8 +22,8 @@ public class MagixTest {
         MAGIX.connect();
     }
 
-    @Test
     @Disabled
+    @Test
     public void testBroadcast(){
         MAGIX.broadcast(Message.builder()
                 .setId(System.currentTimeMillis())
