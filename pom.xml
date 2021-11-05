@@ -3,7 +3,7 @@
 
     <groupId>waltz-controls.magix</groupId>
     <artifactId>java-client</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -49,7 +49,7 @@
         <connection>scm:git:git@github.com:${github.organization}/${github.repo}</connection>
         <developerConnection>scm:git:git@github.com:${github.organization}/${github.repo}</developerConnection>
         <url>https://github.com/${github.organization}/${github.repo}</url>
-        <tag>HEAD</tag>
+        <tag>java-client-0.2</tag>
     </scm>
 
     <distributionManagement>
