@@ -23,6 +23,7 @@ public class MagixTest {
     }
 
     @Test
+    @Disabled
     public void testBroadcast(){
         MAGIX.broadcast(Message.builder()
                 .setId(System.currentTimeMillis())
