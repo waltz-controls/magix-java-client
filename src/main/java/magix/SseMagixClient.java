@@ -9,18 +9,19 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.sse.InboundSseEvent;
 import javax.ws.rs.sse.SseEventSource;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class Magix implements AutoCloseable {
-    private final Logger logger = LoggerFactory.getLogger(Magix.class);
+public class SseMagixClient implements AutoCloseable {
+    private final Logger logger = LoggerFactory.getLogger(SseMagixClient.class);
 
     private final String host;
     private final Client client;
@@ -28,7 +29,7 @@ public class Magix implements AutoCloseable {
     private final ConcurrentMap<String, Subject<InboundSseEvent>> channels = new ConcurrentHashMap<>();
 
 
-    public Magix(String endpoint, Client client) {
+    public SseMagixClient(String endpoint, Client client) {
         this.host = endpoint;
         this.client = client;
     }
@@ -70,14 +71,14 @@ public class Magix implements AutoCloseable {
         logger.warn("Connection to Magix host {} is interrupted!", host);
     }
 
-    public <T> void broadcast(String channel, T message) {
+    public <T> Future<Response> broadcast(String channel, T message) {
         WebTarget target = client.target(UriBuilder.fromUri(String.format("%s/magix/api/broadcast?channel=%s", host, channel)));
 
-        target.request().buildPost(Entity.json(message)).submit();
+        return target.request().buildPost(Entity.json(message)).submit();
     }
 
-    public <T> void broadcast(T message) {
-        this.broadcast("message", message);
+    public <T> Future<Response> broadcast(T message) {
+        return this.broadcast("message", message);
     }
 
     public Observable<InboundSseEvent> observe(String channel) {

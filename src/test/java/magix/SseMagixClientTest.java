@@ -1,38 +1,33 @@
 package magix;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
+import java.util.concurrent.ExecutionException;
 
 @Disabled
-public class MagixTest {
+public class SseMagixClientTest {
 
-    private static Magix MAGIX;
+    private static SseMagixClient SseMAGIXClient;
 
     @BeforeAll
     public static void beforeAll(){
         Client client = ResteasyClientBuilder.newClient();
 
-        MAGIX = new Magix("http://localhost:8080", client);
+        SseMAGIXClient = new SseMagixClient("http://192.168.0.103", client);
 
-        MAGIX.connect();
+        SseMAGIXClient.connect();
     }
 
     @Disabled
     @Test
-    public void testBroadcast(){
-        MAGIX.broadcast(Message.builder()
+    public void testBroadcast() throws ExecutionException, InterruptedException {
+        SseMAGIXClient.broadcast(Message.builder()
                 .setId(System.currentTimeMillis())
-                .build());
-    }
-
-    @AfterEach
-    public void afterEach() throws Exception {
-        Thread.sleep(1000);
+                .build()).get();
     }
 
 
