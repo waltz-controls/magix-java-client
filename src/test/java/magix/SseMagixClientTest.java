@@ -25,9 +25,8 @@ public class SseMagixClientTest {
     @Disabled
     @Test
     public void testBroadcast() throws ExecutionException, InterruptedException {
-        SseMAGIXClient.broadcast(Message.builder()
-                .setId(System.currentTimeMillis())
-                .build()).get();
+        SseMAGIXClient.broadcast(new Message()
+                .withId(System.currentTimeMillis())).get();
     }
 
 

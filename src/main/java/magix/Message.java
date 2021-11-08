@@ -1,88 +1,47 @@
 package magix;
 
-import java.util.ArrayList;
-
-public class Message <T> {
+public class Message<T> {
     public long id;
-    public long parent;
     public String origin;
+    public String format;
+    public long parentId;
     public String target;
     public String user;
-    public String action;
-    public Iterable<T> payload;
+    public T payload;
 
-    public static <T> Message.Builder<T> builder() {
-        return new Builder<>() {
-            private Message<T> message = new Message<>();
 
-            {
-                message.payload = new ArrayList<>();
-            }
-
-            @Override
-            public Message<T> build() {
-                return message;
-            }
-
-            @Override
-            public Builder<T> setId(long id) {
-                message.id = id;
-                return this;
-            }
-
-            @Override
-            public Builder<T> setParent(long parent) {
-                message.parent = parent;
-                return this;
-            }
-
-            @Override
-            public Builder<T> setOrigin(String origin) {
-                message.origin = origin;
-                return this;
-            }
-
-            @Override
-            public Builder<T> setTarget(String target) {
-                message.target = target;
-                return this;
-            }
-
-            @Override
-            public Builder<T> setUser(String user) {
-                message.user = user;
-                return this;
-            }
-
-            @Override
-            public Builder<T> setAction(String action) {
-                message.action = action;
-                return this;
-            }
-
-            @Override
-            public Builder<T> addPayload(T payload) {
-                ((ArrayList<T>) message.payload).add(payload);
-                return this;
-            }
-        };
+    public Message<T> withId(long id) {
+        this.id = id;
+        return this;
     }
 
-    public static interface Builder<T> {
-        Message<T> build();
+    public Message<T> withParentId(long parent) {
+        this.parentId = parent;
+        return this;
+    }
 
-        Builder<T> setId(long id);
+    public Message<T> withOrigin(String origin) {
+        this.origin = origin;
+        return this;
+    }
 
-        Builder<T> setParent(long parent);
+    public Message<T> withFormat(String format) {
+        this.format = format;
+        return this;
+    }
 
-        Builder<T> setOrigin(String origin);
+    public Message<T> withTarget(String target) {
+        this.target = target;
+        return this;
+    }
 
-        Builder<T> setTarget(String target);
+    public Message<T> withUser(String user) {
+        this.user = user;
+        return this;
+    }
 
-        Builder<T> setUser(String user);
-
-        Builder<T> setAction(String action);
-
-        Builder<T> addPayload(T payload);
+    public Message<T> withPayload(T payload) {
+        this.payload = payload;
+        return this;
     }
 }
