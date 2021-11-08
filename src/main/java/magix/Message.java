@@ -1,5 +1,8 @@
 package magix;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Message<T> {
     public long id;
     public String origin;
